@@ -2,6 +2,9 @@
 
 <ul>
   <% @products.each do |product| %>
-    <li><%= product.name %></li>
+    <!-- Передаем сам объект product в метод link_to, и Rails сам поймет, какой у него ID, 
+  и в какой путь этот продукт нужно передать -->
+    <p><strong><%= link_to product.name, product_path(product) %></strong></p> 
   <% end %>
+
 </ul>
