@@ -1,0 +1,18 @@
+<h1>Добавить новый товар</h1>
+
+<!-- form_with автоматически поймет, что нужно отправить данные в метод create -->
+<%= form_with model: @product do |form| %>
+  <div>
+    <%= form.label :name, "Название товара" %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.submit "Создать товар" %>
+  </div>
+<% end %>
+
+<br>
+<%= link_to "Назад к списку", products_path %>
