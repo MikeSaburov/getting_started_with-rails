@@ -1,12 +1,41 @@
-<h1>Наш магазин товаров</h1>
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <!-- Шапка страницы -->
+  <div class="flex justify-between items-center mb-8 border-b pb-4">
+    <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Наш магазин товаров</h1>
+    <%= link_to "Добавить товар", new_product_path, class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-5 rounded-lg shadow-sm transition duration-150 ease-in-out" %>
+  </div>
 
-<ul>
-  <% @products.each do |product| %>
-    <!-- Передаем сам объект product в метод link_to, и Rails сам поймет, какой у него ID, 
-  и в какой путь этот продукт нужно передать -->
-    <p><strong><%= link_to product.name, product_path(product) %></strong></p> 
-  <% end %>
+  <!-- Сетка для карточек (автоматически подстраивается под экраны) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <% @products.each do |product| %>
+      <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition duration-200">
+        
+        <!-- Верхняя часть карточки (Заглушка для будущей картинки) -->
+        <div class="bg-gray-100 h-48 flex items-center justify-center text-gray-400">
+          <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V6.75z" />
+          </svg>
+        </div>
 
-</ul>
-<br>
-<%= link_to "Добавить новый товар", new_product_path %>
+        <!-- Содержимое карточки -->
+        <div class="p-5 flex-grow">
+          <h2 class="text-lg font-bold text-gray-800 mb-2 truncate">
+            <%= link_to product.name, product_path(product), class: "hover:text-indigo-600 transition" %>
+          </h2>
+          
+          <!-- Вывод цены -->
+          <div class="flex items-baseline justify-between mt-4">
+            <span class="text-xl font-extrabold text-gray-900">
+              <%= product.price.present? ? "#{product.price} ₽" : "Цена не указана" %>
+            </span>
+          </div>
+        </div>
+
+        <!-- Нижняя часть карточки с кнопкой подробнее -->
+        <div class="p-5 pt-0 border-t border-gray-50 mt-auto">
+          <%= link_to "Подробнее", product_path(product), class: "block text-center w-full bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium py-2 rounded-md text-sm transition" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
