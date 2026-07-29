@@ -2,6 +2,17 @@
 
 <!-- form_with автоматически поймет, что нужно отправить данные в метод create -->
 <%= form_with model: @product do |form| %>
+<% if @product.errors.any? %>
+    <div style="color: red;">
+      <h3>Форма содержит ошибки:</h3>
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
     <%= form.label :name, "Название товара" %><br>
     <%= form.text_field :name %>

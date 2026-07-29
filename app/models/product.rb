@@ -1,3 +1,3 @@
 class Product < ApplicationRecord
-    validates :name, presence: true
+    validates :name, presence: { message: "не может быть пустым" }
 end
