@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
   def create
     # Применяем Strong Parameters (нашу защиту от хакеров)
-    product_params = params.require(:product).permit(:name)
+    product_params = params.require(:product).permit(:name, :price)
     
     # Создаем товар с безопасными параметрами
     @product = Product.new(product_params)
