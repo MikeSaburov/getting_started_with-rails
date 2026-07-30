@@ -27,4 +27,19 @@ class ProductsController < ApplicationController
       render :new, status: :unprocessable_entity 
     end
   end
+
+  # 1. Этот метод находит товар по ID и автоматически открывает вьюху edit.html.erb
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  # 2. Этот метод обновляет товар по ID и автоматически открывает вьюху edit.html.erb
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to products_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 end
