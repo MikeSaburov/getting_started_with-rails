@@ -36,12 +36,12 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     
-    # ВОТ ЭТОЙ СТРОКИ У ВАС НЕ ХВАТАЛО:
+  
     product_params = params.require(:product).permit(:name, :price)
 
     if @product.update(product_params)
       # Перенаправляем на страницу этого конкретного товара (show)
-      redirect_to product_path(@product)
+      redirect_to product_path(@product), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -51,6 +51,6 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to product_path
+    redirect_to products_path, status: :see_other
   end
 end
