@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id]) #получаем товар по id
+    @product = Product.find(params[:id]) # получаем товар по id
   end
 
   # 1. Этот метод срабатывает, когда мы переходим по кнопке "Добавить новый товар"
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   def create
     # Применяем Strong Parameters (нашу защиту от хакеров)
     product_params = params.require(:product).permit(:name, :price)
-    
+
     # Создаем товар с безопасными параметрами
     @product = Product.new(product_params)
 
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
       redirect_to products_path # Если всё ок — возвращаем пользователя на главную
     else
       # Если сработала валидация (имя пустое) — заново рисуем страницу формы (new.html.erb)
-      render :new, status: :unprocessable_entity 
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -35,8 +35,8 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    
-  
+
+
     product_params = params.require(:product).permit(:name, :price)
 
     if @product.update(product_params)
