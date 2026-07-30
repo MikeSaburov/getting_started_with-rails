@@ -33,11 +33,15 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  # 2. Этот метод обновляет товар по ID и автоматически открывает вьюху edit.html.erb
   def update
     @product = Product.find(params[:id])
+    
+    # ВОТ ЭТОЙ СТРОКИ У ВАС НЕ ХВАТАЛО:
+    product_params = params.require(:product).permit(:name, :price)
+
     if @product.update(product_params)
-      redirect_to products_path
+      # Перенаправляем на страницу этого конкретного товара (show)
+      redirect_to product_path(@product)
     else
       render :edit, status: :unprocessable_entity
     end

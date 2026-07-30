@@ -1,0 +1,58 @@
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <!-- Контейнер с фиксированной шириной, отцентрированный по горизонтали -->
+  <div class="sm:mx-auto Sm:w-full sm:max-w-md">
+    <!-- Кнопка Назад -->
+    <div class="mb-6 text-left">
+      <%= link_to product_path(@product), class: "inline-flex items-center text-sm font-medium text-gray-500 hover:text-indigo-600 transition" do %>
+        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Назад к товару
+      <% end %>
+    </div>
+
+    <!-- Заголовок -->
+    <h1 class="text-center text-3xl font-extrabold text-gray-900 tracking-tight mb-8">
+      Редактировать товар
+    </h1>
+  </div>
+
+  <!-- Белая карточка формы по центру -->
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow-sm border border-gray-200 rounded-2xl sm:px-10">
+      
+      <%= form_with model: @product, class: "space-y-6" do |form| %>
+        
+        <!-- Блок отображения ошибок валидации -->
+        <% if @product.errors.any? %>
+          <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-r-xl mb-4">
+            <h3 class="font-bold mb-1 text-sm">Форма содержит ошибки:</h3>
+            <ul class="list-disc list-inside text-xs space-y-1">
+              <% @product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Поле: Название -->
+        <div>
+          <%= form.label :name, "Название товара", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.text_field :name, class: "w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 outline-none shadow-sm text-sm" %>
+        </div>
+
+        <!-- Поле: Цена -->
+        <div>
+          <%= form.label :price, "Цена товара (₽)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.number_field :price, step: 0.01, class: "w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 outline-none shadow-sm text-sm" %>
+        </div>
+
+        <!-- Кнопка отправки и отмены -->
+        <div class="pt-2 space-y-3">
+          <%= form.submit "Сохранить изменения", class: "w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-xl transition duration-150 shadow-sm cursor-pointer text-center text-sm" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
