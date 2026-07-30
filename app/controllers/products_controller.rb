@@ -46,4 +46,11 @@ class ProductsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  # Удаление товара
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to product_path
+  end
 end
