@@ -11,10 +11,16 @@
       <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition duration-200">
         
         <!-- Верхняя часть карточки (Заглушка для будущей картинки) -->
-        <div class="bg-gray-100 h-48 flex items-center justify-center text-gray-400">
-          <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V6.75z" />
-          </svg>
+        <div class="bg-gray-100 h-48 flex items-center justify-center text-gray-400 overflow-hidden">
+          <% if product.image.attached? %>
+            <%# На лету сжимаем картинку до размеров 400x400 пикселей, переводим в .webp и сжимаем качество до 80% %>
+            <%= image_tag product.image.variant(resize_to_limit: [400, 400], format: :webp, saver: { quality: 80 }), class: "w-full h-full object-cover" %>
+          <% else %>
+            <%# Если картинки нет, показываем иконку-заглушку %>
+            <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V6.75z" />
+            </svg>
+          <% end %>
         </div>
 
         <!-- Содержимое карточки -->

@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
   def create
     # Применяем Strong Parameters (нашу защиту от хакеров)
-    product_params = params.require(:product).permit(:name, :price)
+    product_params = params.require(:product).permit(:name, :price, :image)
 
     # Создаем товар с безопасными параметрами
     @product = Product.new(product_params)
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
 
-    product_params = params.require(:product).permit(:name, :price)
+    product_params = params.require(:product).permit(:name, :price, :image)
 
     if @product.update(product_params)
       # Перенаправляем на страницу этого конкретного товара (show)
